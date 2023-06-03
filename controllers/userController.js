@@ -1,3 +1,5 @@
+import User from "../models/User.js"
+
 const formularioLogin = (req, res) => {
     //se envia una respuesta al servidor puede ser en json tambien
     //con render renderizamos en pantalla de la carpeta auth dentro de views el archivo login.pug
@@ -19,13 +21,22 @@ const formularioRegister = (req, res) => {
 
 }
 
+const registrar = async (req, res) =>{
+    const usuario = await User.create(req.body)
+    
+    res.json(usuario);
+}
+
 const formularioContraseña = (req, res) => {
     res.render('auth/recovery', {
         pagina: 'Recuperar contraseña'
     })
 }
+
+
 export {
     formularioLogin,
     formularioRegister,
-    formularioContraseña
+    formularioContraseña,
+    registrar
 }
